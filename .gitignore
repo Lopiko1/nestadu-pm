@@ -1,0 +1,25 @@
+# Secrets — never commit these
+.env
+.env.*
+*.pem
+*.key
+secrets.json
+
+# Local state: channel->list mapping and the record of processed mentions.
+# Contains internal channel and list IDs. Machine-specific; do not commit.
+.nestadu_pm.json
+nestadu_pm.json
+*.tmp
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
