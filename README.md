@@ -12,9 +12,19 @@ That's the whole data model. No status, priority, or due-date columns — delibe
 
 ---
 
+## What's in here — three separate things
+
+| | What it is | Who needs it |
+|---|---|---|
+| **Slack app** | The `NestaduPM` bot identity. Created from the manifest in the setup guide. Reads channels, posts, writes to the list. | Set up once by a workspace owner |
+| **`nestadu_pm.py`** | The engine. Runs on a schedule, does the actual work. **This is the product** — it runs whether or not anyone opens Claude. | Runs on one always-on machine |
+| **`docs/SKILL.md`** | A Claude skill, so you can say "who's overdue?" instead of typing commands. Optional convenience layer. | Each person installs it separately — cloning the repo does not install it |
+
+---
+
 ## For John (workspace owner) — what you actually need to do
 
-Three things, roughly 20 minutes. Full detail in **[docs/slack-app-setup.md](docs/slack-app-setup.md)**.
+Three things, roughly 20 minutes. Full detail in **[docs/system-setup.md](docs/system-setup.md)**.
 
 1. **Create and approve the Slack app.** The manifest is in the setup guide — paste it at https://api.slack.com/apps. This step needs workspace-owner rights, which is why it lands with you. Joab can't self-serve it.
 2. **Create an Anthropic API key** at https://console.anthropic.com and add a few dollars of credit. This is what tells a real request apart from "thanks, looks good." Expected cost at Nestadu's volume: **cents per month** (uses Claude Haiku).
@@ -126,6 +136,8 @@ Constants at the top of `nestadu_pm.py`:
 | `ANTHROPIC_MODEL` | Haiku | Override with `NESTADU_PM_MODEL` |
 
 `SYSTEM_PROMPT` holds the classification rules and false-positive examples. Adding specific real misfires there is more effective than general instruction tweaks.
+
+**If you change commands or flags, update `docs/SKILL.md` in the same commit** — otherwise Claude gives people instructions for a version that no longer exists.
 
 ---
 

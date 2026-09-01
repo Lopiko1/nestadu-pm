@@ -1,4 +1,4 @@
-# NestaduPM — setup
+# NestaduPM — system setup
 
 One-time setup, about 20 minutes. You do not need to know how to code.
 
@@ -171,6 +171,30 @@ Every 5 minutes it catches new requests; Monday 8am posts a digest; weekday 9am 
 **Windows** — Task Scheduler → Create Basic Task → Daily, repeat every 5 minutes → Action *Start a program* → `python`, arguments `nestadu_pm.py watch`, "Start in" set to the script's folder.
 
 The script only needs the machine awake when it runs. If the laptop sleeps overnight it catches up on the next run — nothing is lost, because it remembers where it stopped.
+
+---
+
+## Step 7 — Install the Claude skill (optional)
+
+This step is only for people who want to talk to the system through Claude — ask
+"who's overdue in #field-ops?" or "add that to the list" instead of typing
+commands. **The system runs fine without it.** Steps 1-6 are the whole product;
+this is a convenience layer.
+
+The skill lives at [SKILL.md](SKILL.md) in this folder. It is not installed by
+cloning the repo — skills are saved per Claude account.
+
+To install it: open Cowork, point Claude at `docs/SKILL.md` from your clone, and
+ask it to save that as a skill named `nestadu-pm`. Claude saves it to your
+account, and it persists across sessions.
+
+Each person who wants it installs it separately. It is not shared automatically
+by the repo.
+
+> **Keep it in sync.** If you change the script's commands or flags, update
+> `docs/SKILL.md` in the same commit and re-save the skill. Otherwise Claude will
+> confidently give people instructions for a version of the script that no longer
+> exists — a stale skill fails quietly, which is worse than failing loudly.
 
 ---
 

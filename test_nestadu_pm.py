@@ -291,5 +291,39 @@ class TestPagination(unittest.TestCase):
         self.assertEqual(calls[1].get("cursor"), "c1")
 
 
+class TestDocsStayInSync(unittest.TestCase):
+    """A stale SKILL.md makes Claude give people instructions for a version of
+    the script that no longer exists. Catch drift here instead."""
+
+    def _read(self, name):
+        path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "docs", name)
+        if not os.path.exists(path):
+            self.skipTest("%s not present" % name)
+        return open(path, encoding="utf-8").read()
+
+    def test_every_command_is_documented_in_skill(self):
+        parser = N.build_parser()
+        sub = [a for a in parser._actions if getattr(a, "choices", None)][0]
+        skill = self._read("SKILL.md")
+        for cmd in sub.choices:
+            self.assertIn("`%s" % cmd, skill,
+                          "command %r missing from docs/SKILL.md" % cmd)
+
+    def test_skill_documents_no_phantom_commands(self):
+        parser = N.build_parser()
+        sub = [a for a in parser._actions if getattr(a, "choices", None)][0]
+        skill = self._read("SKILL.md")
+        for ghost in ("board", "--due", "--type", "--job", "--status"):
+            if ghost.lstrip("-") in sub.choices:
+                continue
+            self.assertNotIn("`%s" % ghost, skill,
+                             "docs/SKILL.md references %r which no longer exists" % ghost)
+
+    def test_tuning_constants_match_the_code(self):
+        skill = self._read("SKILL.md")
+        self.assertIn("`SETTLE_MINUTES` — %d" % N.SETTLE_MINUTES, skill)
+        self.assertIn("currently %d and %d" % (N.WINDOW_BEFORE, N.WINDOW_AFTER), skill)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
