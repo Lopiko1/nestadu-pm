@@ -11,4 +11,4 @@ This app is a prime candidate to be ran in your local setup, since it will requi
 These are the instructions to set it up in your system: 
 **[docs/slack-app-setup.md](docs/slack-app-setup.md)**.
 
-I already took care of Step 1, but the rest require Claude tokens, and most importantly, they require to be in your machine. 
+I already took care of Step 1, but the rest require Claude API tokens, could be the same you're using for NestaduPM, and most importantly, they require to be in your machine. 
