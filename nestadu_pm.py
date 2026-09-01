@@ -89,7 +89,7 @@ def slack_token():
         "SLACK_TOKEN",
         "  macOS/Linux:  export SLACK_TOKEN=xoxb-your-token\n"
         "  Windows:      setx SLACK_TOKEN xoxb-your-token  (then reopen the terminal)\n"
-        "See slack-app-setup.md.",
+        "See docs/system-setup.md.",
     )
 
 
