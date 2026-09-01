@@ -7,9 +7,9 @@ In order to minimize missed tasks and to put everything into a mandatory to-do l
 
 ---
 
-## John — this one's for you
+Setup instructions
 
-**It needs to run on your setup**, because it requires an instance that's always open. That's the main reason it's landing with you rather than sitting on my laptop.
+**It needs to run on your setup**, because it requires an instance that's always open. Not a problem if the Studio where you run NestaduPM is always on anyway.
 
 Three things before it can go live:
 
